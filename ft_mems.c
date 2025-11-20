@@ -1,76 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_mems.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yi-ltan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/20 12:45:19 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/20 12:55:33 by yi-ltan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stddef.h>
 #include "libft.h"
-#include <stdio.h>
 
-void *ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-    size_t i;
-    i = 0;
-    unsigned char *p;
-    p = (unsigned char *)s;
-    while (i < n)
-    {
-        p[i] = (unsigned char)c;
-        i ++;
-    }
-    return (s);
+	size_t			i;
+	unsigned char	*p;
+
+	i = 0;
+	p = (unsigned char *)s;
+	while (i < n)
+	{
+		p[i] = (unsigned char)c;
+		i ++;
+	}
+	return (s);
 }
 
-void ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-    unsigned char *p;
-    size_t i;
-    i = 0;
-    p = (unsigned char *)s;
-    while (i < n)
-    {
-        p[i] = '\0';
-        i++;
-    }
+	unsigned char	*p;
+	size_t			i;
+
+	i = 0;
+	p = (unsigned char *)s;
+	while (i < n)
+	{
+		p[i] = '\0';
+		i++;
+	}
 }
 
-void *ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-    size_t i;
-    unsigned char *d;
-    unsigned char *s;
-    d = (unsigned char *)dest;
-    s = (unsigned char *)src;
+	size_t			i;
+	unsigned char	*d;
+	unsigned char	*s;
 
-    i = 0;
-    while (i < n)
-    {
-        d[i] = s[i];
-        i++;
-    }
-    return (dest);
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dest);
 }
 
-void *ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-    size_t i;
-    unsigned char *d;
-    unsigned char *s;
-    d = (unsigned char *)dest;
-    s = (unsigned char *)src;
-    if (dest < src)
-    {
-        i = 0;
-        while (i < n)
-        {
-            d[i] = s[i];
-            i++;
-        }
-    }
-    else if (dest > src)
-    {
-        i = n - 1;
-        while (i > 0)
-        {
-            d[i] = s[i];
-            i--;
-        }
-        d[i] = s[i];
-    }
-    return (dest);
+	size_t			i;
+	unsigned char	*d;
+	unsigned char	*s;
+
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	if (d < s)
+	{
+		i = 0;
+		while (i < n)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	else if (d > s)
+	{
+		i = n;
+		while (i > 0)
+		{
+			i--;
+			d[i] = s[i];
+		}
+	}
+	return (dest);
 }

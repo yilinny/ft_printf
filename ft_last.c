@@ -1,92 +1,103 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_last.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yi-ltan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/20 12:41:41 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/20 12:45:01 by yi-ltan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdint.h>
 #include "libft.h"
 
-void *ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-    size_t index;
-    index = 0;
-    unsigned char *final;
-    final = (unsigned char *)s;
-    while (index < n)
-    {
-        if ((unsigned char)final[index] == (unsigned char)c)
-            return ((void *)(final + index));
-        index++;
-    }
-    return (NULL);
+	size_t			index;
+	unsigned char	*final;
+
+	index = 0;
+	final = (unsigned char *)s;
+	while (index < n)
+	{
+		if ((unsigned char)final[index] == (unsigned char)c)
+			return ((void *)(final + index));
+		index++;
+	}
+	return (NULL);
 }
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    size_t index;
-    unsigned char *s_one;
-    unsigned char *s_two;
+	size_t			index;
+	unsigned char	*s_one;
+	unsigned char	*s_two;
 
-    index = 0;
-    s_one = (unsigned char *)s1;
-    s_two = (unsigned char *)s2;
-    while (index < n)
-    {
-        if (s_one[index] != s_two[index])
-            return (s_one[index] - s_two[index]);
-        index++;
-    }
-    return (0);
+	index = 0;
+	s_one = (unsigned char *)s1;
+	s_two = (unsigned char *)s2;
+	while (index < n)
+	{
+		if (s_one[index] != s_two[index])
+			return (s_one[index] - s_two[index]);
+		index++;
+	}
+	return (0);
 }
 
-int ft_atoi(const char *s)
+int	ft_atoi(const char *s)
 {
-    int final;
-    int sign;
-    char *str;
+	int		final;
+	int		sign;
+	char	*str;
 
-    final = 0;
-    sign = 1;
-    str = (char *)s;
-    while (*str == ' ' || (*str >= 9 && *str <= 13))
-    {
-        str++;
-    }
-    if (*str == '-')
-    {
-        sign = -1;
-        str++;
-    }
-    while (*str >= '0' && *str <= '9')
-    {
-        final = (final * 10) + (*str - '0');
-        str++;
-    }
-    return (final * sign);
+	final = 0;
+	sign = 1;
+	str = (char *)s;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		final = (final * 10) + (*str - '0');
+		str++;
+	}
+	return (final * sign);
 }
 
-void *ft_calloc(size_t n, size_t esize)
+void	*ft_calloc(size_t n, size_t esize)
 {
-    unsigned char *final;
-    size_t i;
+	unsigned char	*final;
+	size_t			i;
 
-    if (n == 0 || esize == 0)
-        return (malloc(0));
-    if (n > SIZE_MAX / esize)
-        return (NULL);
-    i = 0;
-    final = malloc(n * esize);
-    if (final == NULL)
-        return (final);
-    ft_memset(final, 0, n * esize);
-    return (final);
+	if (n == 0 || esize == 0)
+		return (malloc(0));
+	if (n > SIZE_MAX / esize)
+		return (NULL);
+	i = 0;
+	final = malloc(n * esize);
+	if (final == NULL)
+		return (final);
+	ft_memset(final, 0, n * esize);
+	return (final);
 }
 
-char *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-    char *final;
-    size_t length;
+	char	*final;
+	size_t	length;
 
-    length = ft_strlen(s);
-    final = (char *)malloc((length + 1) * sizeof(char));
-    if (final == NULL)
-        return (NULL);
-    ft_strlcpy(final, s, length + 1);
-    return (final);
+	length = ft_strlen(s);
+	final = (char *)malloc((length + 1) * sizeof(char));
+	if (final == NULL)
+		return (NULL);
+	ft_strlcpy(final, s, length + 1);
+	return (final);
 }
