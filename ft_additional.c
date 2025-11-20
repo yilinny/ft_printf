@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char *ft_substr(const char *s, unsigned int start, size_t len)
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
     char *final;
     char *copy;
@@ -16,7 +16,7 @@ char *ft_substr(const char *s, unsigned int start, size_t len)
     return (final);
 }
 
-char *ft_strjoin(const char *s1, const char *s2)
+char *ft_strjoin(char const *s1, char const *s2)
 {
     size_t i;
     char *final;
@@ -32,7 +32,7 @@ char *ft_strjoin(const char *s1, const char *s2)
     return (final);
 }
 
-char *ft_strtrim(const char *s1, const char *set)
+char *ft_strtrim(char const *s1, char const *set)
 {
     char *final;
     int i;
@@ -65,7 +65,7 @@ void free_split(char **array, int index)
     }
     free(array);
 }
-char **ft_split(const char *s, char c)
+char **ft_split(char const *s, char c)
 {
     char **final;
     char *next;
