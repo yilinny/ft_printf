@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	free_split(char **array, int index)
+static void	free_split(char **array, int index)
 {
 	int	j;
 
@@ -24,7 +24,7 @@ void	free_split(char **array, int index)
 	}
 }
 
-int	get_count(char const *s, char c)
+static int	get_count(char const *s, char c)
 {
 	int	index;
 	int	count;
@@ -42,7 +42,7 @@ int	get_count(char const *s, char c)
 	return (count);
 }
 
-int	populate_final(int count, char const *s, char c, char **final)
+static int	populate_final(int count, char const *s, char c, char **final)
 {
 	int		index;
 	char	*next;

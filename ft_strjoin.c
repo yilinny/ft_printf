@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 09:38:35 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:38:35 by yi-ltan          ###   ########.fr       */
+/*   Created: 2025/11/23 09:41:49 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/23 09:41:49 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	index;
+	size_t	i;
+	char	*final;
+	size_t	length;
 
-	index = 0;
-	while (s[index])
-	{
-		index++;
-	}
-	return (index);
+	length = ft_strlen(s1) + ft_strlen(s2) + 1;
+	final = (char *)malloc(length);
+	if (final == NULL)
+		return (NULL);
+	i = 0;
+	ft_strlcpy(final, s1, length);
+	ft_strlcat(final, s2, length);
+	return (final);
 }

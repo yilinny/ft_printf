@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 09:38:35 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:38:35 by yi-ltan          ###   ########.fr       */
+/*   Created: 2025/11/23 08:49:31 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/23 08:49:31 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-size_t	ft_strlen(const char *s)
+size_t ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t	index;
+	size_t d_size;
+	size_t i;
+	size_t j;
 
-	index = 0;
-	while (s[index])
+	d_size = strlen(dest);
+	if (d_size >= size)
+		return (size);
+	i = d_size;
+	j = 0;
+	while (i < size - 1 && src[j] != '\0')
 	{
-		index++;
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-	return (index);
+	dest[i] = '\0';
+	return (d_size + strlen(src));
 }

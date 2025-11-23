@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 09:38:35 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:38:35 by yi-ltan          ###   ########.fr       */
+/*   Created: 2025/11/23 08:44:41 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/23 08:44:41 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void ft_bzero(void *s, size_t n)
 {
-	size_t	index;
+	unsigned char *p;
+	size_t i;
 
-	index = 0;
-	while (s[index])
+	i = 0;
+	p = (unsigned char *)s;
+	while (i < n)
 	{
-		index++;
+		p[i] = '\0';
+		i++;
 	}
-	return (index);
 }

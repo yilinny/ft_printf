@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 09:38:35 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:38:35 by yi-ltan          ###   ########.fr       */
+/*   Created: 2025/11/23 09:35:08 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/23 09:35:08 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_calloc(size_t n, size_t esize)
 {
-	size_t	index;
+	unsigned char	*final;
+	size_t			i;
 
-	index = 0;
-	while (s[index])
-	{
-		index++;
-	}
-	return (index);
+	if (n == 0 || esize == 0)
+		return (malloc(0));
+	if (n > SIZE_MAX / esize)
+		return (NULL);
+	i = 0;
+	final = malloc(n * esize);
+	if (final == NULL)
+		return (final);
+	ft_memset(final, 0, n * esize);
+	return (final);
 }

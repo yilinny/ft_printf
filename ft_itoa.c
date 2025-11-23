@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 #include <limits.h>
 
-int	digits(int n)
+static int	digits(int n)
 {
 	int	digits;
 
@@ -29,7 +28,7 @@ int	digits(int n)
 	return (digits);
 }
 
-char	*deal_with_sign(int *sign, int n, int length)
+static char	*deal_with_sign(int *sign, int n, int length)
 {
 	char	*final;
 

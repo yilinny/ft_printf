@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 09:38:35 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:38:35 by yi-ltan          ###   ########.fr       */
+/*   Created: 2025/11/23 09:10:22 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/23 09:10:22 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char *ft_strchr(const char *s, int c)
 {
-	size_t	index;
+	int index;
+	char *final;
 
 	index = 0;
-	while (s[index])
+	final = (char *)s;
+	if (c == NULL)
+		return (NULL);
+
+	while (s[index] != '\0')
 	{
+		if (s[index] == (unsigned char)c)
+			return (final + index);
 		index++;
 	}
-	return (index);
+	return (NULL);
 }
