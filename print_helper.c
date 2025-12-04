@@ -1,38 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_helper.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/04 15:24:33 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/12/04 15:44:25 by yi-ltan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include "stdio.h"
 #include "ft_printf.h"
-
-static const char hex[16] = "0123456789abcdef";
-
-static const type_table handle_map[] = {
-	{'c', handle_char},
-	{'s', handle_str},
-	{'p', handle_ptr},
-	{'d', handle_int},
-	{'i', handle_int},
-	{'u', handle_unsigned},
-	{'x', handle_hex},
-	{'X', handle_hex},
-	{'%', handle_char}
-};
-
-int get_index (char c)
-{
-	int index;
-
-	index = 0;
-	while (index < 9)
-	{
-		if (c == handle_map[index].symbol)
-			return index;
-		index ++;
-	}
-	return (-1);
-}
 
 int	handle_char(va_list *args, char symbol)
 {
-	char c;
+	char	c;
+
 	if (symbol == '%')
 		ft_putchar_fd('%', 1);
 	else
@@ -40,138 +24,54 @@ int	handle_char(va_list *args, char symbol)
 		c = va_arg(*args, int);
 		ft_putchar_fd(c, 1);
 	}
-	return 1;
+	return (1);
 }
 
-int handle_str(va_list *args, char symbol)
+int	handle_str(va_list *args, char symbol)
 {
-	char *c;
+	char	*c;
+
 	if (!symbol)
-		return 0;
+		return (0);
 	c = va_arg(*args, char *);
 	if (!c)
 		c = "(null)";
 	ft_putstr_fd(c, 1);
-	return ft_strlen(c);
+	return (ft_strlen(c));
 }
 
-void print_ptr(uintptr_t ptr, int *count)
-{
-	char c;
-	if (ptr >= 16)
-		print_ptr(ptr/16, count);
-	c = hex[ptr % 16];
-	write (1, &c, 1);
-	(*count) ++;
-}
-
-int handle_ptr(va_list *args, char symbol)
-{
-	int count;
-	uintptr_t ptr;
-
-	if (!symbol)
-		return (0);
-	count = 0;
-	ptr = (uintptr_t)(va_arg(*args, void*));
-	if (!ptr)
-	{	
-		write(1, "(nil)", 5);
-		return (5); 	
-	}
-	write (1, "0x", 2);
-	count += 2;
-	print_ptr(ptr, &count);
-	return (count);
-}
-
-int	handle_int (va_list *args, char symbol)
+int	handle_int(va_list *args, char symbol)
 {
 	int		num;
 	char	*str;
 	int		length;
-	
+
 	if (!symbol)
 		return (0);
 	num = va_arg(*args, int);
 	str = ft_itoa(num);
 	if (!str)
-		return(0);
+		return (0);
 	ft_putstr_fd(str, 1);
 	length = ft_strlen(str);
 	free(str);
-	return(length);
+	return (length);
 }
 
-int	handle_unsigned (va_list *args, char symbol)
+int	handle_unsigned(va_list *args, char symbol)
 {
-	unsigned int num;
-	char *str;
-	int length;
+	unsigned int	num;
+	char			*str;
+	int				length;
 
 	if (!symbol)
 		return (0);
 	num = va_arg(*args, unsigned int);
 	str = ft_utoa(num);
 	if (!str)
-		return(0);
+		return (0);
 	ft_putstr_fd(str, 1);
 	length = ft_strlen(str);
 	free (str);
 	return (length);
-}
-
-char	*hex_string(unsigned int hex_input)
-{
-	char *str;
-	unsigned int ctr;
-	int length;
-
-	if (hex_input == 0)
-		return ft_strdup("0");
-	ctr = hex_input;
-	length = 0;
-	while (ctr > 0)
-	{
-		length ++;
-		ctr = ctr/16;
-	}
-	str = malloc(length + 1);
-	if (!str)
-		return(NULL);
-	str[length] = '\0';
-	ctr = hex_input;
-	while (length > 0)
-	{
-		str[length-1] = hex[hex_input%16];
-		hex_input = hex_input/16;
-		length --;
-	}
-	return (str);
-}
-
-int	handle_hex (va_list *args, char symbol)
-{
-	unsigned int 	hex_input;
-	char *			str;
-	int				length;
-	int				i;
-
-	hex_input = va_arg(*args, unsigned int);
-	str = hex_string(hex_input);
-	if (!str)
-		return (0);
-	length = ft_strlen(str);
-	i = 0;
-	if (symbol == 'X')
-	{
-		while (i < length)
-		{
-			str[i] = ft_toupper(str[i]);
-			i ++;
-		}
-	}
-	ft_putstr_fd(str, 1);
-	free(str);
-	return(length);
 }

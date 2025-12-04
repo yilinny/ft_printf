@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 12:37:45 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/12/04 14:30:49 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/12/04 15:24:17 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ char	*ft_itoa(int n)
 	return (final);
 }
 
-static int u_digits (unsigned int n)
+static int	u_digits(unsigned int n)
 {
-	int digits;
+	int	digits;
 
 	digits = 0;
 	while (n > 0)
 	{
 		digits ++;
-		n = n/10;
+		n = n / 10;
 	}
 	return (digits);
 }
@@ -111,4 +111,3 @@ char	*ft_utoa(unsigned int n)
 	final[length] = '\0';
 	return (final);
 }
-

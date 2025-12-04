@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/04 15:46:39 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/12/04 15:48:37 by yi-ltan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include <stdint.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-typedef struct {
-	char symbol;
-	int (*func)(va_list *, char);
-} type_table;
+typedef struct table
+{
+	char	symbol;
+	int		(*func)(va_list *, char);
+}	t_type_table;
 
 int		get_index(char c);
 char	*ft_utoa(unsigned int n);

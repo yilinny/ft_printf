@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 12:19:12 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/12/04 14:41:04 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/12/04 15:48:59 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-static const type_table handle_map[] = {
+int	get_index(char c)
+{
+	int					index;
+	const t_type_table	handle_map[] = {
 	{'c', handle_char},
 	{'s', handle_str},
 	{'p', handle_ptr},
@@ -24,27 +27,47 @@ static const type_table handle_map[] = {
 	{'x', handle_hex},
 	{'X', handle_hex},
 	{'%', handle_char}
-};
+	};
 
+	index = 0;
+	while (index < 9)
+	{
+		if (c == handle_map[index].symbol)
+			return (index);
+		index ++;
+	}
+	return (-1);
+}
 
-static void print_params(va_list *args, int *printed, char specified)
+static void	print_params(va_list *args, int *printed, char specified)
 {
-	int i;
-	int count;
+	int					i;
+	int					count;
+	const t_type_table	handle_map[] = {
+	{'c', handle_char},
+	{'s', handle_str},
+	{'p', handle_ptr},
+	{'d', handle_int},
+	{'i', handle_int},
+	{'u', handle_unsigned},
+	{'x', handle_hex},
+	{'X', handle_hex},
+	{'%', handle_char}
+	};
 
 	i = get_index(specified);
 	if (i == -1)
-		return; //check printf behavior for this
+		return ;
 	count = handle_map[i].func(args, specified);
 	(*printed) += count;
-	return;
+	return ;
 }
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	int		printed;
 	char	*ptr;
-	char	specified; //specified should be string for dealing with bonus 
+	char	specified;
 	va_list	args;
 
 	va_start(args, str);
@@ -56,7 +79,7 @@ int ft_printf(const char *str, ...)
 		{
 			ptr ++;
 			specified = *ptr;
-			print_params(&args, &printed, specified); //advance va arg within funcion for correct type.
+			print_params(&args, &printed, specified);
 		}
 		else
 		{
