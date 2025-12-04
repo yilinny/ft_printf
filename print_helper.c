@@ -1,8 +1,8 @@
-//preexisiting functions --ft_putchar_fd
 #include "libft.h"
-#include "ft_print.h"
+#include "stdio.h"
+#include "ft_printf.h"
 
-static const char hex[16] = "0123456789ABCDEF";
+static const char hex[16] = "0123456789abcdef";
 
 static const type_table handle_map[] = {
 	{'c', handle_char},
@@ -21,7 +21,7 @@ int get_index (char c)
 	int index;
 
 	index = 0;
-	while (index < 8)
+	while (index < 9)
 	{
 		if (c == handle_map[index].symbol)
 			return index;
@@ -49,6 +49,8 @@ int handle_str(va_list *args, char symbol)
 	if (!symbol)
 		return 0;
 	c = va_arg(*args, char *);
+	if (!c)
+		c = "(null)";
 	ft_putstr_fd(c, 1);
 	return ft_strlen(c);
 }
@@ -68,25 +70,29 @@ int handle_ptr(va_list *args, char symbol)
 	int count;
 	uintptr_t ptr;
 
+	if (!symbol)
+		return (0);
 	count = 0;
 	ptr = (uintptr_t)(va_arg(*args, void*));
-	write (1, "0x", 2);
-	count ++;
 	if (!ptr)
-	{
-		write(1, "0", 1);
-		return (count ++);
+	{	
+		write(1, "(nil)", 5);
+		return (5); 	
 	}
+	write (1, "0x", 2);
+	count += 2;
 	print_ptr(ptr, &count);
 	return (count);
 }
 
-int handle_int (va_list *args, char symbol)
+int	handle_int (va_list *args, char symbol)
 {
 	int		num;
 	char	*str;
 	int		length;
 	
+	if (!symbol)
+		return (0);
 	num = va_arg(*args, int);
 	str = ft_itoa(num);
 	if (!str)
@@ -97,12 +103,14 @@ int handle_int (va_list *args, char symbol)
 	return(length);
 }
 
-int handle_unsigned (va_list *args, char symbol)
+int	handle_unsigned (va_list *args, char symbol)
 {
 	unsigned int num;
 	char *str;
 	int length;
 
+	if (!symbol)
+		return (0);
 	num = va_arg(*args, unsigned int);
 	str = ft_utoa(num);
 	if (!str)
@@ -113,7 +121,7 @@ int handle_unsigned (va_list *args, char symbol)
 	return (length);
 }
 
-char *hex_string(unsigned int hex_input)
+char	*hex_string(unsigned int hex_input)
 {
 	char *str;
 	unsigned int ctr;
@@ -142,9 +150,8 @@ char *hex_string(unsigned int hex_input)
 	return (str);
 }
 
-int handle_hex (va_list *args, char symbol)
+int	handle_hex (va_list *args, char symbol)
 {
-	int				count;
 	unsigned int 	hex_input;
 	char *			str;
 	int				length;
@@ -156,11 +163,11 @@ int handle_hex (va_list *args, char symbol)
 		return (0);
 	length = ft_strlen(str);
 	i = 0;
-	if (symbol == 'x')
+	if (symbol == 'X')
 	{
 		while (i < length)
 		{
-			str[i] = ft_tolower(str[i]);
+			str[i] = ft_toupper(str[i]);
 			i ++;
 		}
 	}

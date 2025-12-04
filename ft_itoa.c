@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yi-ltan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 12:37:45 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/20 14:00:18 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/12/04 14:30:49 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int u_digits (unsigned int n)
 {
 	int digits;
 
+	digits = 0;
 	while (n > 0)
 	{
 		digits ++;
@@ -98,8 +99,10 @@ char	*ft_utoa(unsigned int n)
 	ctr = 0;
 	length = u_digits(n);
 	final = malloc(length + 1);
+	if (!final)
+		return (NULL);
 	ctr = length;
-	while (ctr > 0)
+	while (ctr > 0 && n > 0)
 	{
 		final[ctr -1] = n % 10 + '0';
 		n /= 10;

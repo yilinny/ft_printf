@@ -1,4 +1,4 @@
-#include "ft_print.h"
+#include "ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -6,10 +6,16 @@ int main (void)
 {
 	int counted;
 	int expected;
+
 	//test no %
 	printf("hello world!\n");
 	counted = ft_printf("hello world!\n");
 	printf("Digits printed: 13 (expected)  %d (actual)\n", counted);
+
+	//test % % 
+	printf("%%\n");
+	counted = ft_printf("%%\n");
+	printf("Digits printed: 2 (expected)	%d (actual)\n", counted);
 
 	//test %c 
 	printf("hi%c\n", 'a');
@@ -21,13 +27,18 @@ int main (void)
 	counted = ft_printf("hi%c%s\n", 'a', " world");
 	printf("Digits printed: 10 (expected)  %d (actual)\n", counted);
 
+	//test  %s 
+	char *null = NULL;
+	expected = printf("%s\n",null);
+	counted = ft_printf("%s\n", null);
+	printf("Digits printed: %d (expected)  %d (actual)\n", expected, counted);
 	//test %p
 	expected = printf("%p\n", NULL);
 	counted = ft_printf("%p\n", NULL); 
 	printf("Digits printed: %d (expected) \t %d (actual)\n", expected, counted);
 
 	//test %p
-	expected = printf("%p\n", &counted);
+	expected = printf("%p\n", &expected);
 	counted = ft_printf("%p\n", &counted); //format ?? check w testers
 	printf("Digits printed: %d (expected) \t %d (actual)\n", expected, counted);
 
@@ -83,8 +94,5 @@ int main (void)
 	expected = printf("Testing hex 0: %x\n", 0);
 	counted = ft_printf("Testing hex 0: %x\n", 0); 
 	printf("Digits printed: %d (expected) \t %d (actual)\n", expected, counted);
-
-	
-
 
 }

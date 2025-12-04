@@ -6,12 +6,12 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 12:19:12 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/12/03 04:00:29 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/12/04 14:41:04 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_print.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 static const type_table handle_map[] = {
@@ -30,7 +30,6 @@ static const type_table handle_map[] = {
 static void print_params(va_list *args, int *printed, char specified)
 {
 	int i;
-	char *types;
 	int count;
 
 	i = get_index(specified);
