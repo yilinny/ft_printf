@@ -6,11 +6,12 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:43:18 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/12/04 15:44:39 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/12/04 15:52:02 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft.h"
 
 void	print_ptr(uintptr_t ptr, int *count)
 {
