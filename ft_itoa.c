@@ -74,3 +74,38 @@ char	*ft_itoa(int n)
 	final[length + sign] = '\0';
 	return (final);
 }
+
+static int u_digits (unsigned int n)
+{
+	int digits;
+
+	while (n > 0)
+	{
+		digits ++;
+		n = n/10;
+	}
+	return (digits);
+}
+
+char	*ft_utoa(unsigned int n)
+{
+	char	*final;
+	int		length;
+	int		ctr;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	ctr = 0;
+	length = u_digits(n);
+	final = malloc(length + 1);
+	ctr = length;
+	while (ctr > 0)
+	{
+		final[ctr -1] = n % 10 + '0';
+		n /= 10;
+		ctr --;
+	}
+	final[length] = '\0';
+	return (final);
+}
+
